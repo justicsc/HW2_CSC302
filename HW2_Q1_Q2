@@ -1,0 +1,54 @@
+#Hw2 Question 1
+
+#This first one makes a dataframe which then stores data under 3 categories such as name state an sales.
+df1=data.frame(Name=c('James','Paul','Richards','Marico','Samantha','Ravi','Raghu',
+                      'Richards','George','Ema','Samantha','Catherine'),
+               State=c('Alaska','California','Texas','North Carolina','California','Texas',
+                       'Alaska','Texas','North Carolina','Alaska','California','Texas'),
+               Sales=c(14,24,31,12,13,7,9,31,18,16,18,14))
+
+
+#This one makes shows a list which includes all the states shown along with the full amount of sales that come
+#from each state listed under the sales so Alaska has 39 total sales for example.
+aggregate(df1$Sales, by=list(df1$State), FUN=sum)
+
+#This one shows the state and sales but this time it adds a title to each by naming one State and the other
+#called sum_sales as you can see with the summarise section. It acts in a way similar to the aggregate
+library(dplyr)
+df1 %>% group_by(State) %>% summarise(sum_sales = sum(Sales))
+
+#Question 2
+df3 = read.csv("C:/Users/justi/OneDrive/Documents/WorldCupMatches.csv", header=T)
+#a Find the size of the data frame. How Many rows, how many columns?
+head(df3) #just to view whats in the dataframe.
+nrow(df3)
+ncol(df3)
+#B Use summary function to report the statistical summary of your data.
+summary(df3)
+#c Find how many unique locations olympics were held at.
+unique(df3$City)
+#d) Find the average attendance.
+mean(df3$Attendance, na.rm=TRUE) #Had trouble but got it to show when adding the na.rm=true to it.
+#(e) For each Home Team, what is the total number of goals scored? (Hint: Please refer to question 1)
+aggregate(df3$Home.Team.Goals, by=list(df3$Home.Team.Name), FUN =sum)
+#(f) What is the average number of attendees for each year? Is there a trend or pattern in the data in that sense?
+aggregate(df3$Attendance, by=list(df3$Year), FUN = mean)
+
+#Question 3
+df4 = read.csv("C:/Users/justi/OneDrive/Documents/metabolite.csv", header=T)
+head(df4)
+#(a) Find how many Alzheimers patients there are in the data set. (Hint: Please refer to question 1)
+df4[df4$label=='Alzheimer', ]
+
+#(b) Determine the number of missing values for each column. (Hint: is.na( ) )
+is.na(df4)
+
+#(c) Remove the rows which has missing value for the Dopamine column and assign the result to a new data frame.
+#(Hint: is.na( ) )
+
+df5 = df4[is.na(df4['Dopamine'])==TRUE, ]
+
+
+#(d) In the new data frame, replace the missing values in the c4-OH-Pro column with the median value of the same
+#column. (Hint: there is median( ) function.)
+
