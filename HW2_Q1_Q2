@@ -51,4 +51,6 @@ df5 = df4[is.na(df4['Dopamine'])==TRUE, ]
 
 #(d) In the new data frame, replace the missing values in the c4-OH-Pro column with the median value of the same
 #column. (Hint: there is median( ) function.)
-df5[is.na(df5['c4.OH.Pro'])==TRUE, ]
+median(df5$c4.OH.Pro, na.rm = TRUE) #testing median to see number for it 
+df5[is.na(df5['c4.OH.Pro'])==TRUE, ]<-median(df5$c4.OH.Pro, na.rm = TRUE) 
+head(df5)
